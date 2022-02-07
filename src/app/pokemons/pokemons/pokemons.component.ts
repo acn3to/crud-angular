@@ -1,22 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Pokemon } from '../model/pokemon';
+import { PokemonsService } from '../services/pokemons.service';
+
 @Component({
   selector: 'app-pokemons',
   templateUrl: './pokemons.component.html',
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  pokemons: Pokemon[] = [
-    {
-      _id: '1',
-      name: 'Bulbasaur',
-      type1: 'Grass',
-      type2: 'Poison',
-      healthPoint: 45,
-      attack: 49,
-      speed: 45,
-    },
-  ];
+  pokemons: Pokemon[] = [];
   displayedColumns = [
     'name',
     'type1',
@@ -26,8 +19,12 @@ export class PokemonsComponent implements OnInit {
     'speed',
   ];
 
-  constructor() {
+  //pokemonsService: PokemonsService;
+
+  constructor(private pokemonsService: PokemonsService) {
     //this.pokemons = [];
+    //this.pokemonsService = new PokemonsService();
+    this.pokemons = this.pokemonsService.list();
   }
 
   ngOnInit(): void {}
