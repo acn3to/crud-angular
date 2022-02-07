@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "1",
+    "name": "Bulbasaur",
+    "type1": "Grass",
+    "type2": "Poison",
+    "healthPoint": 45,
+    "attack": 49,
+    "speed": 45
+  }
+]
