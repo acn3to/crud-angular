@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pokemon } from '../model/pokemon';
-import { first, tap } from 'rxjs';
+import { delay, first, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +12,10 @@ export class PokemonsService {
   constructor(private httpClient: HttpClient) {}
 
   list() {
-    return this.httpClient
-      .get<Pokemon[]>(this.API)
-      .pipe(
-        first(),
-        tap((pokemons) => console.log(pokemons)));
+    return this.httpClient.get<Pokemon[]>(this.API).pipe(
+      first(),
+      delay(5000),
+      tap((pokemons) => console.log(pokemons))
+    );
   }
 }

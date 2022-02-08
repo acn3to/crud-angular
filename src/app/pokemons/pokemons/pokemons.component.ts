@@ -10,7 +10,7 @@ import { PokemonsService } from '../services/pokemons.service';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  pokemons: Observable<Pokemon[]>;
+  pokemons$: Observable<Pokemon[]>;
   displayedColumns = [
     'name',
     'type1',
@@ -25,7 +25,7 @@ export class PokemonsComponent implements OnInit {
   constructor(private pokemonsService: PokemonsService) {
     //this.pokemons = [];
     //this.pokemonsService = new PokemonsService();
-    this.pokemons = this.pokemonsService.list();
+    this.pokemons$ = this.pokemonsService.list();
   }
 
   ngOnInit(): void {}
