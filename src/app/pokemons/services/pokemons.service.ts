@@ -7,14 +7,14 @@ import { delay, first, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class PokemonsService {
-  private readonly API = './assets/pokemons.json';
+  private readonly API = './assets/apokemons.json';
 
   constructor(private httpClient: HttpClient) {}
 
   list() {
     return this.httpClient.get<Pokemon[]>(this.API).pipe(
       first(),
-      delay(5000),
+      delay(100000),
       tap((pokemons) => console.log(pokemons))
     );
   }

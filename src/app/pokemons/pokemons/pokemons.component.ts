@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { catchError, Observable, of } from 'rxjs';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Pokemon } from '../model/pokemon';
 import { PokemonsService } from '../services/pokemons.service';
@@ -22,10 +24,23 @@ export class PokemonsComponent implements OnInit {
 
   //pokemonsService: PokemonsService;
 
-  constructor(private pokemonsService: PokemonsService) {
+  constructor(
+    public dialog: MatDialog,
+    private pokemonsService: PokemonsService
+  ) {
     //this.pokemons = [];
     //this.pokemonsService = new PokemonsService();
-    this.pokemons$ = this.pokemonsService.list();
+    this.pokemons$ = this.pokemonsService.list().pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os Pokemons.');
+        return of([]);
+      })
+    );
+  }
+  onError(errorMsg: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data: errorMsg,
+    });
   }
 
   ngOnInit(): void {}
