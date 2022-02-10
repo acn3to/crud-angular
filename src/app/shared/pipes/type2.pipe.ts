@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'type1',
+  name: 'type2',
 })
-export class Type1Pipe implements PipeTransform {
+export class Type2Pipe implements PipeTransform {
   transform(value: string): string {
     switch (value) {
       case 'Grass':
